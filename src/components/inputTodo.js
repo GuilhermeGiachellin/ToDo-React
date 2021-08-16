@@ -32,6 +32,7 @@ class InputTodo extends Component {
             <form onSubmit={this.handleSubmit}>
                 <input
                  type="text"
+                 className="input-text"
                  placeholder="Add todo..."
                  value={this.state.title}
                  onChange={this.onChange}
