@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
+
 import '../App.css';
 import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
@@ -8,24 +10,25 @@ import InputTodo from './inputTodo.js';
 
 class TodoContainer extends React.Component {
   state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: 'Setup development environment',
-        completed: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'Develop website and add content',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: 'Deploy to live server',
-        completed: false,
-      },
-    ],
+    todos: [],
   };
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then((response) => response.json())
+      .then((data) => this.setState({ todos: data }));
+  }
+
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.title = updatedTitle;
+        }
+        return todo;
+      }),
+    });
+  }
 
   handleChange = (id) => {
     this.setState((prevState) => ({
