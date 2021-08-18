@@ -17,7 +17,7 @@ const Header = () => {
           lineHeight: '1em',
           color: '#ececec',
           textAlign: 'center',
-          textTransform: 'lowercase',          
+          textTransform: 'lowercase',
         }}
       >
         todos
